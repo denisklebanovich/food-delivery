@@ -8,7 +8,6 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/api/food-delivery.api.test.iml" filepath="$PROJECT_DIR$/.idea/modules/api/food-delivery.api.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/food-delivery.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/food-delivery.app.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/food-delivery.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/food-delivery.app.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/food-delivery.app.test.iml" filepath="$PROJECT_DIR$/.idea/modules/app/food-delivery.app.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/data/food-delivery.data.iml" filepath="$PROJECT_DIR$/.idea/modules/data/food-delivery.data.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/data/food-delivery.data.main.iml" filepath="$PROJECT_DIR$/.idea/modules/data/food-delivery.data.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/data/food-delivery.data.test.iml" filepath="$PROJECT_DIR$/.idea/modules/data/food-delivery.data.test.iml" />

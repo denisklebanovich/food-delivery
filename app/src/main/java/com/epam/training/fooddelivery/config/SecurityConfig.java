@@ -1,5 +1,6 @@
 package com.epam.training.fooddelivery.config;
 
+import com.epam.training.fooddelivery.domain.Customer;
 import com.epam.training.fooddelivery.filters.EmailPasswordAuthFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -16,6 +17,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    public static Customer AUTHENTICATED_CUSTOMER;
 
     @Autowired
     private UserDetailsService userDetailsService;
