@@ -1,0 +1,3 @@
+interfaceOnly: true
+skipDefaultInterface: true
+dateLibrary: java8-localdatetime

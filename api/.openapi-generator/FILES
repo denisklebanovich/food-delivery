@@ -1,0 +1,9 @@
+README.md
+pom.xml
+src/main/java/com/epam/training/fooddelivery/api/ApiUtil.java
+src/main/java/com/epam/training/fooddelivery/api/FoodserviceApi.java
+src/main/java/com/epam/training/fooddelivery/api/OrderserviceApi.java
+src/main/java/com/epam/training/fooddelivery/model/CartModel.java
+src/main/java/com/epam/training/fooddelivery/model/FoodModel.java
+src/main/java/com/epam/training/fooddelivery/model/OrderItemModel.java
+src/main/java/com/epam/training/fooddelivery/model/OrderModel.java
