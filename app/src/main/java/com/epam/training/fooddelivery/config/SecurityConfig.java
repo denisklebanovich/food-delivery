@@ -17,7 +17,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    public static Customer AUTHENTICATED_CUSTOMER;
 
     @Autowired
     private UserDetailsService userDetailsService;
