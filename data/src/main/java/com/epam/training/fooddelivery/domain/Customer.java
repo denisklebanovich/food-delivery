@@ -1,17 +1,13 @@
 package com.epam.training.fooddelivery.domain;
 
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
 @Table(name = "CUSTOMER")
-public class Customer extends User implements UserDetails {
+public class Customer extends User{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,8 +22,7 @@ public class Customer extends User implements UserDetails {
     @Transient
     private Cart cart;
 
-    @Transient
-    private Collection<? extends GrantedAuthority> authorities;
+
 
 
     public Customer(){
@@ -91,37 +86,4 @@ public class Customer extends User implements UserDetails {
         this.cart = cart;
     }
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return authorities;
-    }
-
-    @Override
-    public String getUsername() {
-        return getEmail();
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
-
-    public void setAuthorities(Collection<? extends GrantedAuthority> authorities) {
-        this.authorities = authorities;
-    }
 }
