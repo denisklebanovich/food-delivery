@@ -29,19 +29,6 @@ public class Customer extends User{
         cart = new Cart();
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Customer customer = (Customer) o;
-        return Objects.equals(id, customer.id) && Objects.equals(name, customer.name);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name);
-    }
-
     public Long getId() {
         return id;
     }
@@ -86,4 +73,17 @@ public class Customer extends User{
         this.cart = cart;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Customer customer = (Customer) o;
+        return id.equals(customer.id) && name.equals(customer.name) && balance.equals(customer.balance) && orders.equals(customer.orders) && cart.equals(customer.cart);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), id, name, balance, orders, cart);
+    }
 }

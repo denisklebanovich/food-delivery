@@ -33,12 +33,12 @@ public class OrderItem {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         OrderItem orderItem = (OrderItem) o;
-        return pieces == orderItem.pieces && Objects.equals(id, orderItem.id) && Objects.equals(price, orderItem.price);
+        return pieces == orderItem.pieces && id.equals(orderItem.id) && food.equals(orderItem.food)  && price.equals(orderItem.price);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, pieces, price);
+        return Objects.hash(id, food, pieces, price);
     }
 
     public Long getId() {
