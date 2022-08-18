@@ -12,10 +12,10 @@ import java.util.Objects;
 /**
  * CartModel
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-08-12T16:41:56.404299400+03:00[Europe/Minsk]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-08-18T11:59:28.854894500+03:00[Europe/Minsk]")
 public class CartModel   {
   @JsonProperty("price")
-  private BigDecimal price = null;
+  private BigDecimal price;
 
   @JsonProperty("orderItemModels")
   @Valid

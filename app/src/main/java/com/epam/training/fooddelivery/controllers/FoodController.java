@@ -4,7 +4,6 @@ import com.epam.training.fooddelivery.api.FoodserviceApi;
 import com.epam.training.fooddelivery.domain.Food;
 import com.epam.training.fooddelivery.model.FoodModel;
 import com.epam.training.fooddelivery.service.FoodService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,11 +15,14 @@ import java.util.List;
 @RestController
 public class FoodController implements FoodserviceApi {
 
-    @Autowired
-    FoodService foodService;
+    final FoodService foodService;
 
-    @Autowired
-    Converter<Food,FoodModel> converter;
+    final Converter<Food,FoodModel> converter;
+
+    public FoodController(FoodService foodService, Converter<Food, FoodModel> converter) {
+        this.foodService = foodService;
+        this.converter = converter;
+    }
 
     @Override
     public ResponseEntity<List<FoodModel>> listAllFoods() {

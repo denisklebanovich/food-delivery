@@ -12,7 +12,7 @@ import java.util.Objects;
 /**
  * FoodModel
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-08-12T16:41:56.404299400+03:00[Europe/Minsk]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-08-18T11:59:28.854894500+03:00[Europe/Minsk]")
 public class FoodModel   {
   @JsonProperty("id")
   private Long id;
@@ -21,13 +21,13 @@ public class FoodModel   {
   private String name;
 
   @JsonProperty("calorie")
-  private java.math.BigDecimal calorie = null;
+  private BigDecimal calorie;
 
   @JsonProperty("description")
   private String description;
 
   @JsonProperty("price")
-  private BigDecimal price = null;
+  private BigDecimal price;
 
   /**
    * Gets or Sets category
@@ -117,7 +117,7 @@ public class FoodModel   {
     this.name = name;
   }
 
-  public FoodModel calorie(java.math.BigDecimal calorie) {
+  public FoodModel calorie(BigDecimal calorie) {
     this.calorie = calorie;
     return this;
   }
@@ -130,11 +130,11 @@ public class FoodModel   {
 
   @Valid
 
-  public java.math.BigDecimal getCalorie() {
+  public BigDecimal getCalorie() {
     return calorie;
   }
 
-  public void setCalorie(java.math.BigDecimal calorie) {
+  public void setCalorie(BigDecimal calorie) {
     this.calorie = calorie;
   }
 

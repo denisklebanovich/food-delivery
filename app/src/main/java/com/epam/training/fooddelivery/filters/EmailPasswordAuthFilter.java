@@ -108,6 +108,8 @@ public class EmailPasswordAuthFilter extends AbstractAuthenticationProcessingFil
         super.setAuthenticationFailureHandler(failureHandler);
     }
 
+
+
     @Autowired
     @Override
     public void setAuthenticationManager(AuthenticationManager authenticationManager) {

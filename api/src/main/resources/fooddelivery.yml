@@ -86,12 +86,12 @@ components:
         name:
           type: string
         calorie:
-          format: decimal
-          type: BigDecimal
+          format: BigDecimal
+          type: number
         description:
           type: string
         price:
-          type: decimal
+          type: number
           format: BigDecimal
         category:
           type: string
@@ -104,7 +104,7 @@ components:
           format: int64
           example: 4
         price:
-          type: decimal
+          type: number
           format: BigDecimal
         timestampCreated:
           type: string
@@ -127,13 +127,13 @@ components:
         pieces:
           type: integer
         price:
-          type: decimal
+          type: number
           format: BigDecimal
     CartModel:
       type: object
       properties:
         price:
-          type: decimal
+          type: number
           format: BigDecimal
         orderItemModels:
           type: array

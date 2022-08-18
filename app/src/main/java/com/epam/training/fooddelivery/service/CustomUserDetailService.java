@@ -2,7 +2,6 @@ package com.epam.training.fooddelivery.service;
 
 import com.epam.training.fooddelivery.domain.Customer;
 import com.epam.training.fooddelivery.utils.CustomUserDetails;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,8 +15,11 @@ import java.util.Collection;
 @Service
 public class CustomUserDetailService implements UserDetailsService {
 
-    @Autowired
-    CustomerService customerService;
+    final CustomerService customerService;
+
+    public CustomUserDetailService(CustomerService customerService) {
+        this.customerService = customerService;
+    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -25,8 +27,7 @@ public class CustomUserDetailService implements UserDetailsService {
         if(customer==null) throw new UsernameNotFoundException("User's not found");
         Collection<GrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority("USER"));
-        CustomUserDetails customUserDetails = new CustomUserDetails();
-        customUserDetails.setCustomer(customer);
+        CustomUserDetails customUserDetails = new CustomUserDetails(customer);
         customUserDetails.setAuthorities(authorities);
         return customUserDetails;
     }

@@ -13,6 +13,7 @@ import com.epam.training.fooddelivery.service.OrderService;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.RestController;
@@ -42,8 +43,8 @@ public class OrderController implements OrderserviceApi {
     }
 
     @Override
-    public ResponseEntity<OrderModel> createOrder(CartModel cartModel) {
-        try {
+    public ResponseEntity<OrderModel> createOrder(CartModel cartModel) throws LowBalanceException,IllegalStateException {
+            if(cartModel == null) throw new IllegalStateException();
             UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             Customer customer = customerRepository.findByEmail(userDetails.getUsername());
             Cart cart = cartModelCartConverter.convert(cartModel);
@@ -51,9 +52,6 @@ public class OrderController implements OrderserviceApi {
             Order order = orderService.createOrder(customer);
             OrderModel orderModel = orderOrderModelConverter.convert(order);
             return new ResponseEntity<>(orderModel,HttpStatus.OK);
-        }catch (LowBalanceException|IllegalStateException ex){
-            return ResponseEntity.status(400).build();
-        }
     }
 
     @Override
@@ -67,12 +65,11 @@ public class OrderController implements OrderserviceApi {
     }
 
     @Override
-    public ResponseEntity<OrderModel> getOrderById(Long orderId) {
+    public ResponseEntity<OrderModel> getOrderById(Long orderId) throws AccessDeniedException,NullPointerException {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Customer customer = customerRepository.findByEmail(userDetails.getUsername());
-        Order order = orderRepository.findById(orderId).orElse(null);
-        if (order == null) return ResponseEntity.status(404).build();
-        if (!order.getCustomer().getId().equals(customer.getId())) return ResponseEntity.status(403).build();
+        Order order = orderRepository.findById(orderId).orElseThrow(() -> new NullPointerException());
+        if (!order.getCustomer().getId().equals(customer.getId())) throw new AccessDeniedException("Acces denied");
         return new ResponseEntity<>(orderOrderModelConverter.convert(order), HttpStatus.OK);
     }
 }
