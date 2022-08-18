@@ -7,38 +7,19 @@ import java.util.Objects;
 @Entity
 @Table(name = "ORDER_ITEM")
 public class OrderItem {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    private int pieces;
+    private BigDecimal price;
+    @ManyToOne
+    @JoinColumn(name = "order_id")
+    private Order order;
     @OneToOne
     @JoinColumn(name = "food_id")
     private Food food;
 
-    @ManyToOne
-    @JoinColumn(name = "order_id")
-    private Order order;
-
-    private int pieces;
-    private BigDecimal price;
-
-    @Override
-    public String toString() {
-        return food.getName() + " " + getPieces() + " piece(s) " + getPrice() + " EUR total";
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        OrderItem orderItem = (OrderItem) o;
-        return pieces == orderItem.pieces && id.equals(orderItem.id) && food.equals(orderItem.food)  && price.equals(orderItem.price);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, food, pieces, price);
+    public OrderItem() {
     }
 
     public Long getId() {
@@ -47,14 +28,6 @@ public class OrderItem {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Food getFood() {
-        return food;
-    }
-
-    public void setFood(Food food) {
-        this.food = food;
     }
 
     public int getPieces() {
@@ -81,4 +54,34 @@ public class OrderItem {
         this.order = order;
     }
 
+    public Food getFood() {
+        return food;
+    }
+
+    public void setFood(Food food) {
+        this.food = food;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        OrderItem orderItem = (OrderItem) o;
+        return pieces == orderItem.pieces && Objects.equals(id, orderItem.id) && Objects.equals(price, orderItem.price);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, pieces, price);
+    }
+
+    @Override
+    public String toString() {
+        return "OrderItem{" +
+                "id=" + id +
+                ", pieces=" + pieces +
+                ", price=" + price +
+                ", food=" + food +
+                '}';
+    }
 }

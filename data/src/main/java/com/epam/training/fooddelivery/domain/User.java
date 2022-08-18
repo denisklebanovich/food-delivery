@@ -5,10 +5,11 @@ import java.util.Objects;
 
 @MappedSuperclass
 public class User {
-
     private String email;
     private String password;
 
+    public User() {
+    }
 
     public String getEmail() {
         return email;
@@ -18,16 +19,13 @@ public class User {
         this.email = email;
     }
 
-
     public String getPassword() {
         return password;
     }
 
-
     public void setPassword(String password) {
         this.password = password;
     }
-
 
     @Override
     public boolean equals(Object o) {
@@ -41,5 +39,12 @@ public class User {
     public int hashCode() {
         return Objects.hash(email, password);
     }
-}
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
+}

@@ -6,39 +6,19 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "FOOD")
-public class Food{
-
+public class Food {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String name;
     private BigDecimal calorie;
-    private BigDecimal price;
     private String description;
+    private BigDecimal price;
 
     @Enumerated(EnumType.STRING)
     private Category category;
 
-
-    @Override
-    public String toString() {
-        return name + " " + price + " EUR";
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Food food = (Food) o;
-        return Objects.equals(id, food.id) && Objects.equals(name, food.name)
-                && Objects.equals(calorie, food.calorie) && Objects.equals(description, food.description)
-                && Objects.equals(price, food.price) && category == food.category;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, calorie, description, price, category);
+    public Food() {
     }
 
     public Long getId() {
@@ -65,14 +45,6 @@ public class Food{
         this.calorie = calorie;
     }
 
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
-
     public String getDescription() {
         return description;
     }
@@ -81,11 +53,46 @@ public class Food{
         this.description = description;
     }
 
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
     public Category getCategory() {
         return category;
     }
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Food food = (Food) o;
+        return Objects.equals(id, food.id) && Objects.equals(name, food.name)
+                && Objects.equals(calorie, food.calorie) && Objects.equals(description, food.description)
+                && Objects.equals(price, food.price) && category == food.category;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, calorie, description, price, category);
+    }
+
+    @Override
+    public String toString() {
+        return "Food{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", calorie=" + calorie +
+                ", description='" + description + '\'' +
+                ", price=" + price +
+                ", category=" + category +
+                '}';
     }
 }

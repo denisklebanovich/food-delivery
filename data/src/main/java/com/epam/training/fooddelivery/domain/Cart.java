@@ -1,23 +1,21 @@
 package com.epam.training.fooddelivery.domain;
 
-
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-
 public class Cart {
     private BigDecimal price;
     private List<OrderItem> orderItems;
 
-    public Cart(){
-        this.price = BigDecimal.ZERO;
-        this.orderItems = new ArrayList<>();
+    public Cart() {
     }
 
-
     public BigDecimal getPrice() {
+        if (price == null) {
+            return BigDecimal.ZERO;
+        }
         return price;
     }
 
@@ -30,15 +28,14 @@ public class Cart {
     }
 
     public void setOrderItems(List<OrderItem> orderItems) {
-        this.orderItems = orderItems;
+        if (this.orderItems == null) {
+            this.orderItems = new ArrayList<>();
+        }
+        this.orderItems.addAll(orderItems);
     }
 
-    @Override
-    public String toString() {
-        return "Cart{" +
-                "price=" + price +
-                ", orderItems=" + orderItems +
-                '}';
+    public void removeOrderItem(OrderItem orderItem){
+        orderItems.remove(orderItem);
     }
 
     @Override
@@ -52,5 +49,13 @@ public class Cart {
     @Override
     public int hashCode() {
         return Objects.hash(price, orderItems);
+    }
+
+    @Override
+    public String toString() {
+        return "Cart{" +
+                "price=" + price +
+                ", orderItems=" + orderItems +
+                '}';
     }
 }

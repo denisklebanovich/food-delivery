@@ -2,31 +2,26 @@ package com.epam.training.fooddelivery.domain;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
 @Table(name = "CUSTOMER")
-public class Customer extends User{
-
+public class Customer extends User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String name;
     private BigDecimal balance;
-
-    @OneToMany(mappedBy = "customer",fetch = FetchType.EAGER)
-    private List<Order> orders;
 
     @Transient
     private Cart cart;
 
+    @OneToMany(mappedBy = "customer", fetch = FetchType.EAGER)
+    private List<Order> orders;
 
-
-
-    public Customer(){
-        cart = new Cart();
+    public Customer() {
     }
 
     public Long getId() {
@@ -53,18 +48,6 @@ public class Customer extends User{
         this.balance = balance;
     }
 
-    public List<Order> getOrders() {
-        return orders;
-    }
-
-    public void setOrders(List<Order> orders) {
-        this.orders = orders;
-    }
-
-    public void addOrder(Order order){
-        orders.add(order);
-    }
-
     public Cart getCart() {
         return cart;
     }
@@ -73,17 +56,37 @@ public class Customer extends User{
         this.cart = cart;
     }
 
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        if (this.orders == null) {
+            this.orders = new ArrayList<>();
+        }
+        this.orders.addAll(orders);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
         Customer customer = (Customer) o;
-        return id.equals(customer.id) && name.equals(customer.name);
+        return Objects.equals(id, customer.id) && Objects.equals(name, customer.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), id, name);
+        return Objects.hash(id, name);
+    }
+
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", balance=" + balance +
+                ", cart=" + cart +
+                '}';
     }
 }

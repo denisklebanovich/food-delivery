@@ -62,6 +62,7 @@ public class OrderController implements OrderserviceApi {
     public ResponseEntity<List<OrderModel>> getCustomerOrders() {
         Customer customer = getCustomer();
         List<Order> orders = customer.getOrders();
+        if(orders == null || orders.isEmpty()) return new ResponseEntity<>(null,HttpStatus.OK);
         List<OrderModel> orderModels = orders.stream().map(orderOrderModelConverter::convert).toList();
         return new ResponseEntity<>(orderModels, HttpStatus.OK);
     }

@@ -16,6 +16,8 @@ import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import static java.util.Arrays.asList;
+
 @Service
 public class DefaultOrderService implements OrderService {
     private final OrderRepository orderRepository;
@@ -44,7 +46,8 @@ public class DefaultOrderService implements OrderService {
         order.setPrice(customer.getCart().getPrice());
         order.setTimestampCreated(LocalDateTime.now());
         order.setOrderItems(orderItems);
-        customer.addOrder(order);
+
+        customer.setOrders(asList(order));
         customer.setBalance(customer.getBalance().subtract(order.getPrice()));
 
 

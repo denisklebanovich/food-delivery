@@ -109,7 +109,7 @@ components:
         timestampCreated:
           type: string
           format: date-time
-          example: 02-06-2022 14:36:26
+          example: "02-06-2022 14:36:26"
         orderItemModels:
           type: array
           items:
@@ -122,7 +122,6 @@ components:
           format: int64
           example: 4
         foodModel:
-          type: object
           $ref: '#/components/schemas/FoodModel'
         pieces:
           type: integer
