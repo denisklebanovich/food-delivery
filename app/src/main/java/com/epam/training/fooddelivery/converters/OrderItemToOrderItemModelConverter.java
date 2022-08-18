@@ -20,7 +20,7 @@ public class OrderItemToOrderItemModelConverter implements Converter<OrderItem, 
         orderItemModel.setId(source.getId());
         orderItemModel.setFoodModel(foodToFoodModelConverter.convert(source.getFood()));
         orderItemModel.setPieces(source.getPieces());
-        orderItemModel.setPrice(source.getPrice());
+        orderItemModel.setPrice(source.getPrice().longValue());
         return orderItemModel;
     }
 }

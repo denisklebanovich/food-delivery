@@ -21,41 +21,43 @@ import javax.validation.constraints.*;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-08-18T11:59:28.854894500+03:00[Europe/Minsk]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-08-18T19:12:13.004527200+03:00[Europe/Minsk]")
 @Validated
 @Api(value = "orderservice", description = "the orderservice API")
 public interface OrderserviceApi {
 
     /**
-     * POST /orderservice/orders : The created order from the cart
+     * POST /orderservice/orders : Create order from the cart of body
+     * Create order
      *
-     * @param cartModel CartModel (optional)
-     * @return Created order from the cart (status code 200)
+     * @param cartModel Send new cart (optional)
+     * @return Order created successfully (status code 200)
      *         or The cart is empty (status code 400)
-     *         or The balance of the customer is not enough (status code 401)
+     *         or Balance of authenticated customer is not enough (status code 405)
      */
-    @ApiOperation(value = "The created order from the cart", nickname = "createOrder", notes = "", response = OrderModel.class, tags={  })
+    @ApiOperation(value = "Create order from the cart of body", nickname = "createOrder", notes = "Create order", response = OrderModel.class, tags={ "order-controller", })
     @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "Created order from the cart", response = OrderModel.class),
+        @ApiResponse(code = 200, message = "Order created successfully", response = OrderModel.class),
         @ApiResponse(code = 400, message = "The cart is empty"),
-        @ApiResponse(code = 401, message = "The balance of the customer is not enough") })
+        @ApiResponse(code = 405, message = "Balance of authenticated customer is not enough") })
     @RequestMapping(
         method = RequestMethod.POST,
         value = "/orderservice/orders",
         produces = { "application/json" },
         consumes = { "application/json" }
     )
-    ResponseEntity<OrderModel> createOrder(@ApiParam(value = "CartModel") @Valid @RequestBody(required = false) CartModel cartModel);
+    ResponseEntity<OrderModel> createOrder(@ApiParam(value = "Send new cart") @Valid @RequestBody(required = false) CartModel cartModel);
 
 
     /**
-     * GET /orderservice/orders : List of authenticated customer&#39;s orders
+     * GET /orderservice/orders : List orders of authenticated customer
+     * Show list of all orders in customer
      *
-     * @return Customer orders (status code 200)
+     * @return A list of authenticated customer&#39;s orders (status code 200)
      */
-    @ApiOperation(value = "List of authenticated customer's orders", nickname = "getCustomerOrders", notes = "", response = OrderModel.class, responseContainer = "List", tags={  })
+    @ApiOperation(value = "List orders of authenticated customer", nickname = "getCustomerOrders", notes = "Show list of all orders in customer", response = OrderModel.class, responseContainer = "List", tags={ "order-controller", })
     @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "Customer orders", response = OrderModel.class, responseContainer = "List") })
+        @ApiResponse(code = 200, message = "A list of authenticated customer's orders", response = OrderModel.class, responseContainer = "List") })
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/orderservice/orders",
@@ -65,23 +67,23 @@ public interface OrderserviceApi {
 
 
     /**
-     * GET /orderservice/orders/{orderId} : Get order by id
+     * GET /orderservice/orders/{orderId} : Get order of authenticated customer by orderId
      *
-     * @param orderId The ID of the order to return. (required)
-     * @return An order object (status code 200)
-     *         or The order exists but does not belong to the authenticated customer (status code 403)
-     *         or The order does not exist (status code 404)
+     * @param orderId ID of order to return (required)
+     * @return Order by orderId (status code 200)
+     *         or the order exists but does not belong to the authenticated customer (status code 403)
+     *         or the order does not exist (status code 404)
      */
-    @ApiOperation(value = "Get order by id", nickname = "getOrderById", notes = "", response = OrderModel.class, tags={  })
+    @ApiOperation(value = "Get order of authenticated customer by orderId", nickname = "getOrderById", notes = "", response = OrderModel.class, tags={ "order-controller", })
     @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "An order object", response = OrderModel.class),
-        @ApiResponse(code = 403, message = "The order exists but does not belong to the authenticated customer"),
-        @ApiResponse(code = 404, message = "The order does not exist") })
+        @ApiResponse(code = 200, message = "Order by orderId", response = OrderModel.class),
+        @ApiResponse(code = 403, message = "the order exists but does not belong to the authenticated customer"),
+        @ApiResponse(code = 404, message = "the order does not exist") })
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/orderservice/orders/{orderId}",
         produces = { "application/json" }
     )
-    ResponseEntity<OrderModel> getOrderById(@ApiParam(value = "The ID of the order to return.", required = true) @PathVariable("orderId") Long orderId);
+    ResponseEntity<OrderModel> getOrderById(@ApiParam(value = "ID of order to return", required = true) @PathVariable("orderId") Long orderId);
 
 }

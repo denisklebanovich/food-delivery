@@ -16,19 +16,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.List;
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-08-18T11:59:28.854894500+03:00[Europe/Minsk]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-08-18T19:12:13.004527200+03:00[Europe/Minsk]")
 @Validated
 @Api(value = "foodservice", description = "the foodservice API")
 public interface FoodserviceApi {
 
     /**
      * GET /foodservice/foods : List all foods
+     * Show list of all foods available in foodservice
      *
-     * @return Succesfull (status code 200)
+     * @return A list of foods (status code 200)
      */
-    @ApiOperation(value = "List all foods", nickname = "listAllFoods", notes = "", response = FoodModel.class, responseContainer = "List", tags={  })
+    @ApiOperation(value = "List all foods", nickname = "listAllFoods", notes = "Show list of all foods available in foodservice", response = FoodModel.class, responseContainer = "List", tags={ "food-controller", })
     @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "Succesfull", response = FoodModel.class, responseContainer = "List") })
+        @ApiResponse(code = 200, message = "A list of foods", response = FoodModel.class, responseContainer = "List") })
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/foodservice/foods",

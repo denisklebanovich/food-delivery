@@ -1,27 +1,30 @@
 package com.epam.training.fooddelivery.model;
 
+import java.util.Objects;
+import com.epam.training.fooddelivery.model.OrderItemModel;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-
-import javax.validation.Valid;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
+import org.openapitools.jackson.nullable.JsonNullable;
+import javax.validation.Valid;
+import javax.validation.constraints.*;
 
 /**
  * CartModel
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-08-18T11:59:28.854894500+03:00[Europe/Minsk]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-08-18T19:12:13.004527200+03:00[Europe/Minsk]")
 public class CartModel   {
   @JsonProperty("price")
-  private BigDecimal price;
+  private Long price;
 
   @JsonProperty("orderItemModels")
   @Valid
   private List<OrderItemModel> orderItemModels = null;
 
-  public CartModel price(BigDecimal price) {
+  public CartModel price(Long price) {
     this.price = price;
     return this;
   }
@@ -32,13 +35,12 @@ public class CartModel   {
   */
   @ApiModelProperty(value = "")
 
-  @Valid
 
-  public BigDecimal getPrice() {
+  public Long getPrice() {
     return price;
   }
 
-  public void setPrice(BigDecimal price) {
+  public void setPrice(Long price) {
     this.price = price;
   }
 

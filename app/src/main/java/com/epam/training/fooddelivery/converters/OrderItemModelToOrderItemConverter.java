@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
+
 @Component
 public class OrderItemModelToOrderItemConverter implements Converter<OrderItemModel, OrderItem> {
 
@@ -20,7 +22,7 @@ public class OrderItemModelToOrderItemConverter implements Converter<OrderItemMo
         orderItem.setId(source.getId());
         orderItem.setFood(foodModelFoodConverter.convert(source.getFoodModel()));
         orderItem.setPieces(source.getPieces());
-        orderItem.setPrice(source.getPrice());
+        orderItem.setPrice(BigDecimal.valueOf(source.getPrice()));
         return orderItem;
     }
 }

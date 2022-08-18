@@ -1,18 +1,19 @@
 package com.epam.training.fooddelivery.model;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonValue;
-import io.swagger.annotations.ApiModelProperty;
-
-import javax.validation.Valid;
-import java.math.BigDecimal;
 import java.util.Objects;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import org.openapitools.jackson.nullable.JsonNullable;
+import javax.validation.Valid;
+import javax.validation.constraints.*;
 
 /**
  * FoodModel
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-08-18T11:59:28.854894500+03:00[Europe/Minsk]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-08-18T19:12:13.004527200+03:00[Europe/Minsk]")
 public class FoodModel   {
   @JsonProperty("id")
   private Long id;
@@ -21,13 +22,13 @@ public class FoodModel   {
   private String name;
 
   @JsonProperty("calorie")
-  private BigDecimal calorie;
+  private Long calorie;
 
   @JsonProperty("description")
   private String description;
 
   @JsonProperty("price")
-  private BigDecimal price;
+  private Long price;
 
   /**
    * Gets or Sets category
@@ -86,7 +87,7 @@ public class FoodModel   {
    * Get id
    * @return id
   */
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(example = "4", value = "")
 
 
   public Long getId() {
@@ -106,7 +107,7 @@ public class FoodModel   {
    * Get name
    * @return name
   */
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(example = "Gazpacho", value = "")
 
 
   public String getName() {
@@ -117,7 +118,7 @@ public class FoodModel   {
     this.name = name;
   }
 
-  public FoodModel calorie(BigDecimal calorie) {
+  public FoodModel calorie(Long calorie) {
     this.calorie = calorie;
     return this;
   }
@@ -128,13 +129,12 @@ public class FoodModel   {
   */
   @ApiModelProperty(value = "")
 
-  @Valid
 
-  public BigDecimal getCalorie() {
+  public Long getCalorie() {
     return calorie;
   }
 
-  public void setCalorie(BigDecimal calorie) {
+  public void setCalorie(Long calorie) {
     this.calorie = calorie;
   }
 
@@ -147,7 +147,7 @@ public class FoodModel   {
    * Get description
    * @return description
   */
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(example = "Gazpacho", value = "")
 
 
   public String getDescription() {
@@ -158,7 +158,7 @@ public class FoodModel   {
     this.description = description;
   }
 
-  public FoodModel price(BigDecimal price) {
+  public FoodModel price(Long price) {
     this.price = price;
     return this;
   }
@@ -169,13 +169,12 @@ public class FoodModel   {
   */
   @ApiModelProperty(value = "")
 
-  @Valid
 
-  public BigDecimal getPrice() {
+  public Long getPrice() {
     return price;
   }
 
-  public void setPrice(BigDecimal price) {
+  public void setPrice(Long price) {
     this.price = price;
   }
 

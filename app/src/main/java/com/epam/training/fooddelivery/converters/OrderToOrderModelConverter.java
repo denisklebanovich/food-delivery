@@ -24,7 +24,7 @@ public class OrderToOrderModelConverter implements Converter<Order, OrderModel> 
         List<OrderItemModel> orderItemModels = new ArrayList<>();
         source.getOrderItems().forEach(orderItem -> orderItemModels.add(orderItemOrderItemModelConverter.convert(orderItem)));
         orderModel.setOrderItemModels(orderItemModels);
-        orderModel.setPrice(source.getPrice());
+        orderModel.setPrice(source.getPrice().longValue());
         orderModel.setTimestampCreated(source.getTimestampCreated());
         return orderModel;
     }

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +21,7 @@ public class CartModelToCartConverter implements Converter<CartModel, Cart> {
     @Override
     public Cart convert(CartModel source) {
         Cart cart = new Cart();
-        cart.setPrice(source.getPrice());
+        cart.setPrice(BigDecimal.valueOf(source.getPrice()));
         List<OrderItem> orderItems = new ArrayList<>();
         source.getOrderItemModels().forEach(orderItemModel -> orderItems.add(converter.convert(orderItemModel)));
         cart.setOrderItems(orderItems);

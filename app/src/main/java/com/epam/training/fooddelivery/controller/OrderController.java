@@ -4,7 +4,9 @@ import com.epam.training.fooddelivery.api.OrderserviceApi;
 import com.epam.training.fooddelivery.domain.Cart;
 import com.epam.training.fooddelivery.domain.Customer;
 import com.epam.training.fooddelivery.domain.Order;
+import com.epam.training.fooddelivery.exceptions.EmptyCartException;
 import com.epam.training.fooddelivery.exceptions.LowBalanceException;
+import com.epam.training.fooddelivery.exceptions.NotFoundException;
 import com.epam.training.fooddelivery.model.CartModel;
 import com.epam.training.fooddelivery.model.OrderModel;
 import com.epam.training.fooddelivery.repository.CustomerRepository;
@@ -21,6 +23,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -47,9 +50,15 @@ public class OrderController implements OrderserviceApi {
 
     @Override
     @PostMapping("/orders")
-    public ResponseEntity<OrderModel> createOrder(CartModel cartModel) throws LowBalanceException, IllegalStateException {
+    public ResponseEntity<OrderModel> createOrder(CartModel cartModel) throws LowBalanceException, IllegalStateException,EmptyCartException {
+        if (cartModel == null
+                || cartModel.getPrice() == null
+                || cartModel.getOrderItemModels() == null
+                || cartModel.getPrice() == 0
+                || cartModel.getOrderItemModels().size() == 0) {
+            throw new EmptyCartException("The Cart is empty");
+        }
         Customer customer = getCustomer();
-        if (cartModel == null) throw new IllegalStateException();
         Cart cart = cartModelCartConverter.convert(cartModel);
         customer.setCart(cart);
         Order order = orderService.createOrder(customer);
@@ -62,7 +71,7 @@ public class OrderController implements OrderserviceApi {
     public ResponseEntity<List<OrderModel>> getCustomerOrders() {
         Customer customer = getCustomer();
         List<Order> orders = customer.getOrders();
-        if(orders == null || orders.isEmpty()) return new ResponseEntity<>(null,HttpStatus.OK);
+        if(orders == null || orders.isEmpty()) return new ResponseEntity<>(Collections.emptyList(),HttpStatus.OK);
         List<OrderModel> orderModels = orders.stream().map(orderOrderModelConverter::convert).toList();
         return new ResponseEntity<>(orderModels, HttpStatus.OK);
     }
@@ -76,8 +85,8 @@ public class OrderController implements OrderserviceApi {
     @GetMapping("/orders/{orderId}")
     public ResponseEntity<OrderModel> getOrderById(Long orderId) throws AccessDeniedException, NullPointerException {
         Customer customer = getCustomer();
-        Order order = orderRepository.findById(orderId).orElseThrow(NullPointerException::new);
-        if (!order.getCustomer().equals(customer)) throw new AccessDeniedException("Acces denied");
+        Order order = orderRepository.findById(orderId).orElseThrow(() -> new NotFoundException("Order not found"));
+        if (!order.getCustomer().equals(customer)) throw new AccessDeniedException("Access denied");
         return new ResponseEntity<>(orderOrderModelConverter.convert(order), HttpStatus.OK);
     }
 }

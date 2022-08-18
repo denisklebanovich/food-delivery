@@ -4,7 +4,7 @@ plugins{
     id 'java'
 }
 openApiGenerate {
-    inputSpec = "$projectDir/src/main/resources/fooddelivery.yml".toString()
+    inputSpec = "$projectDir/src/main/resources/fooddelivery.json".toString()
     outputDir = "$projectDir".toString()
     apiPackage = "com.epam.training.fooddelivery.api"
     modelPackage = "com.epam.training.fooddelivery.model"
@@ -12,7 +12,7 @@ openApiGenerate {
     generatorName = "spring"
 }
 openApiValidate {
-    inputSpec = "$projectDir/src/main/resources/fooddelivery.yml".toString()
+    inputSpec = "$projectDir/src/main/resources/fooddelivery.json".toString()
 }
 dependencies{
     implementation platform('org.springframework.boot:spring-boot-dependencies:2.6.3')

@@ -2,21 +2,26 @@ package com.epam.training.fooddelivery.utils;
 
 import com.epam.training.fooddelivery.domain.Customer;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 public class CustomUserDetails implements UserDetails {
 
-    private Collection<? extends GrantedAuthority> authorities;
     private Customer customer;
 
     public CustomUserDetails(Customer customer){
         this.customer = customer;
     }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return authorities;
+        Set<GrantedAuthority> grantedAuthority = new HashSet<>();
+        grantedAuthority.add(new SimpleGrantedAuthority("USER"));
+        return grantedAuthority;
     }
 
     @Override
@@ -49,15 +54,4 @@ public class CustomUserDetails implements UserDetails {
         return true;
     }
 
-    public void setAuthorities(Collection<? extends GrantedAuthority> authorities) {
-        this.authorities = authorities;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
-
-    public Customer getCustomer() {
-        return customer;
-    }
 }
