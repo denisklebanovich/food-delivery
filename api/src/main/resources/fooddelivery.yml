@@ -11,7 +11,7 @@ paths:
       operationId: listAllFoods
       responses:
         '200':
-          description: Succesfull
+          description: List of foods
           content:
             application/json:
               schema:

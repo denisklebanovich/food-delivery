@@ -1,4 +1,4 @@
-package com.epam.training.fooddelivery.service;
+package com.epam.training.fooddelivery.exceptions;
 
 
 public class AuthenticationException extends RuntimeException {

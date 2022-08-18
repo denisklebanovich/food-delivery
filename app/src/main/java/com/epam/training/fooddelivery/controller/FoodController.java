@@ -1,4 +1,4 @@
-package com.epam.training.fooddelivery.controllers;
+package com.epam.training.fooddelivery.controller;
 
 import com.epam.training.fooddelivery.api.FoodserviceApi;
 import com.epam.training.fooddelivery.domain.Food;
@@ -7,10 +7,11 @@ import com.epam.training.fooddelivery.service.FoodService;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 public class FoodController implements FoodserviceApi {
@@ -25,9 +26,9 @@ public class FoodController implements FoodserviceApi {
     }
 
     @Override
+    @GetMapping("/foodservice/foods")
     public ResponseEntity<List<FoodModel>> listAllFoods() {
-        List<FoodModel> foodModels = new ArrayList<>();
-        foodService.listAllFood().forEach(food -> foodModels.add(converter.convert(food)));
+        List<FoodModel> foodModels = foodService.listAllFood().stream().map(food -> converter.convert(food)).collect(Collectors.toList());
         return new ResponseEntity<>(foodModels, HttpStatus.OK);
     }
 }

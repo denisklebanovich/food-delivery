@@ -4,6 +4,7 @@ import com.epam.training.fooddelivery.domain.Cart;
 import com.epam.training.fooddelivery.domain.Customer;
 import com.epam.training.fooddelivery.domain.Order;
 import com.epam.training.fooddelivery.domain.OrderItem;
+import com.epam.training.fooddelivery.exceptions.LowBalanceException;
 import com.epam.training.fooddelivery.repository.CustomerRepository;
 import com.epam.training.fooddelivery.repository.FoodRepository;
 import com.epam.training.fooddelivery.repository.OrderItemRepository;
@@ -11,6 +12,7 @@ import com.epam.training.fooddelivery.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -30,6 +32,7 @@ public class DefaultOrderService implements OrderService {
     }
 
     @Override
+    @Transactional
      public Order createOrder(Customer customer) throws LowBalanceException,IllegalStateException {
         validateBalance(customer);
         validateCart(customer.getCart());

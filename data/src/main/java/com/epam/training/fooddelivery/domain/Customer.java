@@ -79,11 +79,11 @@ public class Customer extends User{
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         Customer customer = (Customer) o;
-        return id.equals(customer.id) && name.equals(customer.name) && balance.equals(customer.balance) && orders.equals(customer.orders) && cart.equals(customer.cart);
+        return id.equals(customer.id) && name.equals(customer.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), id, name, balance, orders, cart);
+        return Objects.hash(super.hashCode(), id, name);
     }
 }
