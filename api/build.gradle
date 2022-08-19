@@ -1,8 +1,17 @@
-plugins{
+plugins {
     id "org.openapi.generator" version "5.3.0"
     id 'org.springframework.boot' version '2.6.3'
     id 'java'
+    id 'maven-publish'
 }
+
+group 'com.epam'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
 openApiGenerate {
     inputSpec = "$projectDir/src/main/resources/fooddelivery.json".toString()
     outputDir = "$projectDir".toString()
@@ -14,16 +23,22 @@ openApiGenerate {
 openApiValidate {
     inputSpec = "$projectDir/src/main/resources/fooddelivery.json".toString()
 }
-dependencies{
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
+    testImplementation 'org.assertj:assertj-core:3.22.0'
+    testImplementation 'org.mockito:mockito-core:4.3.1'
     implementation platform('org.springframework.boot:spring-boot-dependencies:2.6.3')
-    implementation 'org.springframework.boot:spring-boot-starter:2.7.2'
+    implementation 'org.springframework.boot:spring-boot-starter'
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
     implementation 'org.openapitools:jackson-databind-nullable:0.2.2'
     implementation 'javax.validation:validation-api:2.0.1.Final'
     implementation 'io.springfox:springfox-boot-starter:3.0.0'
     implementation 'io.springfox:springfox-swagger-ui:3.0.0'
-    implementation project(':data')
 }
+
 sourceSets {
     main {
         java {
@@ -38,6 +53,6 @@ jar {
     enabled = true
 }
 
-repositories {
-    mavenCentral()
+test {
+    useJUnitPlatform()
 }
